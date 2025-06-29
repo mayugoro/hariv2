@@ -12,6 +12,8 @@ from telegram.ext import (
 # Load .env
 load_dotenv()
 token = os.getenv("BOT_TOKEN")
+image_url = os.getenv("image_url")
+url_admin = os.getenv("url_admin")
 
 # State conversation
 Tahun, TanggalBulan, JumlahHari, ArahHari = range(4)
@@ -87,16 +89,20 @@ async def admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [[
         InlineKeyboardButton(
             text="Hubungi Admin",
-            url=f"https://t.me/Mayugoro?text=Bang%20lu%20ganteng🗿🗿"
+            url=url_admin
         )
     ]]
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.message.reply_text("Silakan hubungi admin melalui tombol berikut:", reply_markup=reply_markup)
 
 async def donate(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    image_url = "https://i.imgur.com/qCmx5Bk.png"
     caption = "Sini yg banyak🗿"
-    await context.bot.send_photo(chat_id=update.effective_chat.id, photo=image_url, caption=caption)
+    await context.bot.send_photo(
+        chat_id=update.effective_chat.id,
+        photo=image_url,
+        caption=caption
+    )
+
 
 async def get_tahun(update: Update, context: ContextTypes.DEFAULT_TYPE):
     tahun = update.message.text.strip()
